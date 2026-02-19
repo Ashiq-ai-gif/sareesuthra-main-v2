@@ -70,17 +70,16 @@ const Hero = () => {
         </div>
 
         {/* Right Image/Visual */}
-        <div className="relative hidden md:block h-[80vh] w-full animate-fade-in" style={{ animationDelay: '0.2s' }}>
+        <div className="relative h-[55vh] md:h-[80vh] w-full animate-fade-in order-first md:order-none" style={{ animationDelay: '0.2s' }}>
            <div className="absolute inset-0 bg-transparent z-10"></div>
-           {/* Placeholder for Hero Image - ideally a model in a saree */}
            <div className="relative h-full w-full rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white">
               <img 
-                src="https://images.unsplash.com/photo-1610030469983-98e650e81f51?q=80&w=2070&auto=format&fit=crop" 
-                alt="Elegant Saree Model" 
+                src="/hero-saree.jpg"
+                alt="Woman wearing an elegant saree"
                 loading="eager"
                 decoding="async"
                 fetchpriority="high"
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
               />
               
               {/* Floating Badge */}
