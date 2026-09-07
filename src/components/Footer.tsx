@@ -57,13 +57,13 @@ const Footer = () => {
             <h4 className="font-heading text-xl mb-8 text-gold">Contact</h4>
             <div className="space-y-6">
               <a
-                href="tel:7010418285"
+                href="tel:7356424034"
                 className="flex items-start gap-4 text-sm text-white/60 hover:text-gold transition-colors group"
               >
                 <div className="p-2 border border-white/10 rounded-full group-hover:border-gold/50 transition-colors">
                   <Phone className="h-4 w-4" />
                 </div>
-                <span className="mt-1.5">7010418285</span>
+                <span className="mt-1.5">7356424034</span>
               </a>
               <a
                 href="mailto:contact@sareesutraofficial.com"

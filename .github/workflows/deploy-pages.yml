@@ -1,0 +1,55 @@
+name: Deploy site to GitHub Pages
+
+# Builds the Vite app and publishes it to GitHub Pages (free, allows commercial
+# use). The InsForge values below are the PUBLIC client URL + anon key (already
+# shipped in the browser bundle), so they are safe to keep here.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Build
+        env:
+          VITE_INSFORGE_URL: https://4yxtwib4.us-east.insforge.app
+          VITE_INSFORGE_ANON_KEY: anon_ae65930a37dd638ead66cea3edb672b2293c2df6413f8a1b7cb9e221e2fb1931
+        run: npm run build
+      - name: SPA fallback for client-side routes
+        run: cp dist/index.html dist/404.html
+      - name: Custom domain
+        run: echo "sareesutraofficial.com" > dist/CNAME
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

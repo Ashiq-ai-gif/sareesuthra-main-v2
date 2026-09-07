@@ -140,22 +140,6 @@ const Header = () => {
                 <Search className="h-6 w-6" />
               </Button>
 
-              <Button
-                variant="ghost"
-                size="icon"
-                className={`relative hover:text-puniora-orange-500 hover:bg-transparent transition-colors ${!isTransparent ? 'text-puniora-black' : 'text-puniora-black'}`}
-                onClick={openCart}
-                aria-label="Open Cart"
-              >
-                <ShoppingBag className="h-6 w-6" />
-                {totalItems > 0 && (
-                  <span className="absolute top-0 right-0 bg-puniora-orange-500 text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center animate-scale-in">
-                    {totalItems}
-                  </span>
-                )}
-              </Button>
-
-
               <Link to={user ? "/account" : "/auth"}>
                 <Button
                   variant="ghost"

@@ -1,0 +1,36 @@
+name: InsForge keep-alive
+
+# Keeps the free-tier InsForge project from auto-pausing after ~10 days of
+# inactivity: it sends a tiny read to the data API on a schedule, which hits
+# Postgres and counts as activity, resetting the inactivity timer.
+#
+# The anon key below is a PUBLIC client key — it already ships inside the
+# frontend JS bundle, so keeping it here is safe (read-only via RLS/anon).
+#
+# NOTE: GitHub auto-disables scheduled workflows after 60 days with no commits
+# to the repo. Any push you make resets that. If the repo will sit untouched
+# for months, prefer an external pinger (e.g. cron-job.org) instead — it has no
+# such limit.
+
+on:
+  schedule:
+    - cron: '0 6 */2 * *'   # every 2 days at 06:00 UTC (well under the 10-day window)
+  workflow_dispatch: {}       # lets you run it manually from the Actions tab
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    env:
+      INSFORGE_URL: https://4yxtwib4.us-east.insforge.app
+      INSFORGE_ANON_KEY: anon_ae65930a37dd638ead66cea3edb672b2293c2df6413f8a1b7cb9e221e2fb1931
+    steps:
+      - name: Ping InsForge data API (touch Postgres)
+        run: |
+          code=$(curl -s -o /dev/null -w "%{http_code}" \
+            -H "Authorization: Bearer ${INSFORGE_ANON_KEY}" \
+            -H "apikey: ${INSFORGE_ANON_KEY}" \
+            "${INSFORGE_URL}/api/database/records/products?limit=1")
+          echo "InsForge responded with HTTP $code"
+          if [ "$code" != "200" ]; then
+            echo "Keep-alive ping failed (expected 200)"; exit 1
+          fi

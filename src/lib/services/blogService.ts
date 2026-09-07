@@ -43,7 +43,7 @@ export const blogService = {
   async createBlog(blog: Omit<Blog, 'id' | 'created_at' | 'updated_at'>) {
     const { data, error } = await supabase
       .from('blogs')
-      .insert(blog)
+      .insert([blog])
       .select()
       .single();
 

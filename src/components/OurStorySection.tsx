@@ -18,9 +18,9 @@ const OurStorySection = () => {
           {/* Left: Image Grid/Collage */}
           <div className="w-full md:w-1/2 relative">
              <div className="aspect-[4/5] rounded-tl-[5rem] rounded-br-[5rem] overflow-hidden shadow-2xl relative z-20">
-                <img 
-                    src="https://images.unsplash.com/photo-1583391733958-84b2e1b10620?q=80&w=2674&auto=format&fit=crop" 
-                    alt="Saree Sutra Artisans" 
+                <img
+                    src="/our-story.jpg"
+                    alt="Saree Sutra Artisans"
                     loading="lazy"
                     decoding="async"
                     className="w-full h-full object-cover"

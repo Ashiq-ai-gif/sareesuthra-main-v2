@@ -1,10 +1,7 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 import { Product, formatPrice } from "@/lib/products";
 import { productService } from "@/lib/services/productService";
-import { useCart } from "@/context/CartContext";
-import { Plus } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { getDirectUrl } from "@/lib/utils/imageUtils";
 
@@ -15,17 +12,10 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ product, index, overrideImages }: ProductCardProps) => {
-  const { addToCart } = useCart();
   const cardRef = useRef<HTMLElement>(null);
 
   // Use the custom hook for scroll reveal
   useScrollReveal('animate-reveal');
-
-  const handleAddToCart = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    addToCart(product);
-  };
 
   const [bundleImages, setBundleImages] = React.useState<string[]>([]);
 
@@ -101,17 +91,6 @@ const ProductCard = ({ product, index, overrideImages }: ProductCardProps) => {
 
           {/* Vignette - Minimal */}
           <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-40 transition-opacity duration-500" />
-
-          {/* Quick Add Button (Floating - Slide up) */}
-          <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out z-20">
-            <Button
-              className="w-full bg-white/95 backdrop-blur-md text-puniora-black hover:bg-puniora-orange hover:text-white font-body tracking-[0.2em] text-[10px] uppercase h-11 rounded-full shadow-lg border border-white/50"
-              onClick={handleAddToCart}
-              disabled={product.is_sold_out}
-            >
-              {product.is_sold_out ? "Sold Out" : "Add to Cart"}
-            </Button>
-          </div>
 
           {/* Out of Stock Overlay Badge */}
           {product.is_sold_out && (

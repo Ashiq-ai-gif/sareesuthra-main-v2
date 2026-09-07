@@ -32,7 +32,7 @@ export const settingsService = {
     
     const { error } = await supabase
       .from("site_settings")
-      .upsert({ key, value: stringValue, updated_at: new Date().toISOString() });
+      .upsert([{ key, value: stringValue, updated_at: new Date().toISOString() }]);
 
     if (error) {
       console.error(`Error updating setting ${key}:`, error);

@@ -17,7 +17,6 @@ const AdminLayout = ({ children, activeTab, onTabChange }: AdminLayoutProps) => 
 
   const navItems = [
     { icon: Package, label: "Products", href: "/admin", id: "products" },
-    { icon: ShoppingCart, label: "Orders", href: "/admin", id: "orders" },
     { icon: Menu, label: "Reviews", href: "/admin", id: "reviews" },
     { icon: BookOpen, label: "Journal", href: "/admin", id: "blog" },
     { icon: BarChart3, label: "Analytics", href: "/admin", id: "analytics" },

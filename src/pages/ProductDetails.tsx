@@ -23,7 +23,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Loader2, ShoppingCart, ArrowLeft, Star, ShieldCheck, Truck, RefreshCw, Share2, CreditCard, Banknote, MapPin, Clock } from "lucide-react";
+import { Loader2, ShoppingCart, ArrowLeft, Star, ShieldCheck, Truck, RefreshCw, Share2, CreditCard, Banknote, MapPin, Clock, MessageCircle } from "lucide-react";
 import { toast } from "sonner";
 import { getDirectUrl } from "@/lib/utils/imageUtils";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
@@ -112,11 +112,24 @@ const ProductDetails = () => {
     }
   };
 
-  const handleBuyNow = () => {
-    if (product) {
-      addToCart({ ...product, price: selectedPrice, size: selectedSize, images: [selectedImage, ...product.images.filter(i => i !== selectedImage)] });
-      navigate("/checkout");
-    }
+  // Saree Sutra WhatsApp business number (+91 73564 24034), digits only for wa.me
+  const WHATSAPP_NUMBER = "917356424034";
+
+  const handleOrderOnWhatsApp = () => {
+    if (!product) return;
+    const code = `SS-${product.id.slice(0, 8).toUpperCase()}`;
+    const messageLines = [
+      "Hi Saree Sutra! I'd like to order this saree:",
+      "",
+      `*${product.name}*`,
+      `Code: ${code}`,
+      selectedSize ? `Size: ${selectedSize}` : "",
+      `Price: ${formatPrice(selectedPrice)}`,
+      "",
+      window.location.href,
+    ].filter(Boolean);
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(messageLines.join("\n"))}`;
+    window.open(url, "_blank", "noopener,noreferrer");
   };
 
   const handleShare = async () => {
@@ -426,49 +439,31 @@ const ProductDetails = () => {
 
 
 
-                {/* Desktop Action Buttons */}
-                <div className="hidden lg:flex flex-col sm:flex-row gap-4 pt-4">
-                  <Button
-                    variant="gold"
-                    size="xl"
-                    disabled={product.is_sold_out}
-                    className="flex-1 h-14 shadow-xl shadow-gold/20 hover:scale-[1.02] transition-transform disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-                    onClick={() => addToCart({ ...product, price: selectedPrice, size: selectedSize, images: [selectedImage, ...product.images.filter(i => i !== selectedImage)] })}
-                  >
-                    <ShoppingCart className="mr-3 h-5 w-5" />
-                    {product.is_sold_out ? "SOLD OUT" : "ADD TO CART"}
-                  </Button>
+                {/* Desktop Action Button */}
+                <div className="hidden lg:flex pt-4">
                   <Button
                     variant="luxuryOutline"
                     size="xl"
                     disabled={product.is_sold_out}
-                    className="flex-1 h-14 border-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                    onClick={handleBuyNow}
+                    className="w-full h-14 border-none bg-[#25D366] text-white hover:bg-[#1ebe5b] shadow-xl shadow-[#25D366]/20 hover:scale-[1.02] transition-transform disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                    onClick={handleOrderOnWhatsApp}
                   >
-                    {product.is_sold_out ? "UNAVAILABLE" : "BUY NOW"}
+                    <MessageCircle className="mr-3 h-5 w-5" />
+                    {product.is_sold_out ? "UNAVAILABLE" : "BUY VIA WHATSAPP"}
                   </Button>
                 </div>
 
-                {/* Mobile Action Buttons (Visible only if not stuck) */}
+                {/* Mobile Action Button (Visible only if not stuck) */}
                 <div className="lg:hidden flex flex-col gap-4 pt-6">
-                  <Button
-                    variant="gold"
-                    size="xl"
-                    className="w-full h-14 shadow-xl shadow-gold/20"
-                    onClick={() => addToCart({ ...product, price: selectedPrice, size: selectedSize, images: [selectedImage, ...product.images.filter(i => i !== selectedImage)] })}
-                    disabled={product.is_sold_out}
-                  >
-                    <ShoppingCart className="mr-3 h-5 w-5" />
-                    {product.is_sold_out ? "SOLD OUT" : "ADD TO CART"}
-                  </Button>
                   <Button
                     variant="luxuryOutline"
                     size="xl"
-                    className="w-full h-14"
-                    onClick={handleBuyNow}
+                    className="w-full h-14 border-none bg-[#25D366] text-white hover:bg-[#1ebe5b] shadow-xl shadow-[#25D366]/20"
+                    onClick={handleOrderOnWhatsApp}
                     disabled={product.is_sold_out}
                   >
-                    {product.is_sold_out ? "UNAVAILABLE" : "BUY NOW"}
+                    <MessageCircle className="mr-3 h-5 w-5" />
+                    {product.is_sold_out ? "UNAVAILABLE" : "BUY VIA WHATSAPP"}
                   </Button>
                 </div>
 
@@ -522,11 +517,12 @@ const ProductDetails = () => {
             </div>
             <Button
               variant="gold"
-              className="flex-1 h-12 rounded-full shadow-lg shadow-gold/20 font-bold uppercase tracking-[0.2em] text-[10px] bg-gradient-to-r from-gold to-yellow-600 hover:from-yellow-600 hover:to-gold text-white border-none disabled:opacity-50 disabled:cursor-not-allowed"
-              onClick={() => addToCart({ ...product, price: selectedPrice, size: selectedSize, images: [selectedImage, ...product.images.filter(i => i !== selectedImage)] })}
+              className="flex-1 h-12 rounded-full shadow-lg shadow-[#25D366]/20 font-bold uppercase tracking-[0.2em] text-[10px] bg-[#25D366] hover:bg-[#1ebe5b] text-white border-none disabled:opacity-50 disabled:cursor-not-allowed"
+              onClick={handleOrderOnWhatsApp}
               disabled={product.is_sold_out}
             >
-              {product.is_sold_out ? "SOLD OUT" : "Add to Cart"}
+              <MessageCircle className="mr-2 h-4 w-4" />
+              {product.is_sold_out ? "UNAVAILABLE" : "Buy via WhatsApp"}
             </Button>
           </div>
         </div>

@@ -72,7 +72,7 @@ export const userService = {
 
     const { data, error } = await supabase
       .from("addresses")
-      .insert(address)
+      .insert([address])
       .select()
       .single();
 

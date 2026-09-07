@@ -7,7 +7,7 @@ const WhatsAppButton = () => {
     // Hide on admin pages
     if (location.pathname.startsWith("/admin")) return null;
 
-    const phoneNumber = "917010418285";
+    const phoneNumber = "917356424034";
     const message = encodeURIComponent("Hi, I identify this from the Puniora website and would like to know more.");
 
     return (

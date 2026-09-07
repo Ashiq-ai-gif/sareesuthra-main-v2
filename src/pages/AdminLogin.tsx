@@ -26,7 +26,7 @@ const AdminLogin = () => {
 
       if (error) throw error;
 
-      if (data.session) {
+      if (data?.accessToken) {
         localStorage.setItem("isAdminAuthenticated", "true"); // Keep locally for simple route protection
         // Ideally we would use proper auth context, but this bridges the gap for now
         toast.success("Welcome back, Admin");

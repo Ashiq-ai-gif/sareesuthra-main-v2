@@ -1,11 +1,16 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { Session, User } from "@supabase/supabase-js";
-import { supabase } from "@/lib/supabase";
+import { insforge } from "@/lib/supabase";
 import { toast } from "sonner";
 
+// InsForge user shape (only the fields the app reads).
+export interface AuthUser {
+  id: string;
+  email: string;
+  [key: string]: unknown;
+}
+
 interface AuthContextType {
-  session: Session | null;
-  user: User | null;
+  user: AuthUser | null;
   loading: boolean;
   loginWithOtp: (email: string) => Promise<void>;
   verifyOtp: (email: string, token: string) => Promise<void>;
@@ -13,7 +18,6 @@ interface AuthContextType {
 }
 
 const AuthContext = createContext<AuthContextType>({
-  session: null,
   user: null,
   loading: true,
   loginWithOtp: async () => { },
@@ -22,43 +26,44 @@ const AuthContext = createContext<AuthContextType>({
 });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [session, setSession] = useState<Session | null>(null);
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<AuthUser | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check active session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      setLoading(false);
-    }).catch((error) => {
-      console.error("Auth session check failed:", error);
-      setLoading(false);
+    let cancelled = false;
+
+    // Hydrate the current user on startup. In SPA mode the SDK rehydrates the
+    // session from the httpOnly refresh cookie, so `user` may briefly be null.
+    insforge.auth.getCurrentUser()
+      .then(({ data, error }) => {
+        if (cancelled) return;
+        setUser(error ? null : ((data?.user as AuthUser) ?? null));
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Auth session check failed:", error);
+        if (!cancelled) setLoading(false);
+      });
+
+    // React to sign-in / sign-out that happen elsewhere in the app.
+    const unsubscribe = insforge.auth.onAuthStateChange(() => {
+      insforge.auth.getCurrentUser().then(({ data, error }) => {
+        if (cancelled) return;
+        setUser(error ? null : ((data?.user as AuthUser) ?? null));
+        setLoading(false);
+      });
     });
 
-    // Listen for auth changes
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      setLoading(false);
-    });
-
-    return () => subscription.unsubscribe();
+    return () => {
+      cancelled = true;
+      unsubscribe?.();
+    };
   }, []);
 
   const loginWithOtp = async (email: string) => {
     try {
       setLoading(true);
-      const { error } = await supabase.auth.signInWithOtp({
-        email,
-        options: {
-          shouldCreateUser: true,
-          // Don't include emailRedirectTo - this forces OTP token instead of magic link
-        },
-      });
+      const { error } = await insforge.auth.signInWithOtp({ email });
 
       if (error) throw error;
       toast.success("OTP sent!", {
@@ -66,18 +71,19 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       });
     } catch (error: any) {
       console.error("Login error:", error);
-      
+
       // Smart Handling: If rate limit exceeded, user likely already has a valid OTP.
       // We allow them to proceed to the OTP step to enter the code they have.
-      if (error.message?.toLowerCase().includes("rate limit") || 
+      if (error.message?.toLowerCase().includes("rate limit") ||
           error.message?.toLowerCase().includes("too many requests") ||
+          error.statusCode === 429 ||
           error.status === 429) {
-            
+
         toast.info("OTP already sent recently", {
           description: "Please check your email for the code sent a moment ago. Rate limit exceeded for new codes.",
         });
         // We do NOT throw here, effectively treating it as a "success" so the UI moves to the next step
-        return; 
+        return;
       }
 
       toast.error("Failed to send OTP", {
@@ -92,19 +98,18 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const verifyOtp = async (email: string, token: string) => {
     try {
       setLoading(true);
-      const { data, error } = await supabase.auth.verifyOtp({
+      const { data, error } = await insforge.auth.verifyOtp({
         email,
-        token,
-        type: 'email',
+        otp: token,
       });
 
       if (error) throw error;
 
-      setSession(data.session);
-      setUser(data.user);
+      // verifyOtp saves the session automatically and returns the user.
+      setUser((data?.user as AuthUser) ?? null);
 
       toast.success("Login successful!", {
-        description: "Welcome back to Puniora.",
+        description: "Welcome back to Saree Sutra.",
       });
     } catch (error: any) {
       console.error("Verification error:", error);
@@ -120,8 +125,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const logout = async () => {
     try {
       setLoading(true);
-      const { error } = await supabase.auth.signOut();
+      const { error } = await insforge.auth.signOut();
       if (error) throw error;
+      setUser(null);
       toast.success("Logged out successfully");
     } catch (error: any) {
       console.error("Logout error:", error);
@@ -132,7 +138,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ session, user, loading, loginWithOtp, verifyOtp, logout }}>
+    <AuthContext.Provider value={{ user, loading, loginWithOtp, verifyOtp, logout }}>
       {children}
     </AuthContext.Provider>
   );

@@ -140,7 +140,7 @@ export const shiprocketService = {
         billing_pincode: order.address_json.pincode,
         billing_state: order.address_json.state,
         billing_country: "India",
-        billing_email: "contact@puniora.com",
+        billing_email: "contact@sareesutraofficial.com",
         billing_phone: order.customer_mobile.replace(/\s/g, ''), // Remove spaces for Shiprocket validation
         shipping_is_billing: true,
         order_items: order.items.map((item: any) => ({

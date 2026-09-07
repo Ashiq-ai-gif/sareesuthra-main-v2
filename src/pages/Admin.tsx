@@ -1,26 +1,21 @@
 import AdminLayout from "../components/admin/AdminLayout";
 import ProductList from "../components/admin/ProductList";
-import OrderList from "../components/admin/OrderList";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Package, ShoppingCart, IndianRupee, Database, Loader2 } from "lucide-react";
+import { Package, Star, Sparkles, Database, Loader2 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { productService } from "@/lib/services/productService";
-import { orderService, Order } from "@/lib/services/orderService";
 import { reviewService, Review } from "@/lib/services/reviewService";
 import ReviewList from "../components/admin/ReviewList";
-import { products as staticProducts, giftSet as staticGiftSet, formatPrice, Product } from "@/lib/products";
+import { products as staticProducts, giftSet as staticGiftSet, Product } from "@/lib/products";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import SettingsTab from "@/components/admin/SettingsTab";
 import BlogManager from "@/components/admin/BlogManager";
 import AnalyticsTab from "@/components/admin/AnalyticsTab";
-import { BookOpen } from "lucide-react";
-import NewOrderForm from "@/components/admin/NewOrderForm";
 
 const Admin = () => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [orders, setOrders] = useState<Order[]>([]);
   const [reviews, setReviews] = useState<(Review & { product_name?: string })[]>([]);
   const [loading, setLoading] = useState(true);
   const [isSeeding, setIsSeeding] = useState(false);
@@ -29,9 +24,8 @@ const Admin = () => {
     try {
       setLoading(true);
 
-      const [productsResult, ordersResult, reviewsResult] = await Promise.allSettled([
+      const [productsResult, reviewsResult] = await Promise.allSettled([
         productService.getProducts(),
-        orderService.getOrders(),
         reviewService.getAllReviews()
       ]);
 
@@ -59,14 +53,6 @@ const Admin = () => {
       } else {
         console.error("Failed to fetch products:", productsResult.reason);
         toast.error("Failed to load products. Check console.");
-      }
-
-      // Handle Orders
-      if (ordersResult.status === "fulfilled") {
-        setOrders(ordersResult.value);
-      } else {
-        console.error("Failed to fetch orders:", ordersResult.reason);
-        toast.error("Failed to load orders.");
       }
 
       // Handle Reviews
@@ -121,13 +107,10 @@ const Admin = () => {
     }
   };
 
-  const paidOrders = orders.filter(o => o.payment_status === 'paid');
-  const revenue = paidOrders.reduce((sum, o) => sum + o.total_amount, 0);
-
   const stats = [
     { label: "Total Products", value: products.filter(p => !p.isGiftSet).length.toString(), icon: Package, color: "text-blue-500" },
-    { label: "Total Orders", value: orders.length.toString(), icon: ShoppingCart, color: "text-green-500" },
-    { label: "Revenue", value: formatPrice(revenue), icon: IndianRupee, color: "text-gold" },
+    { label: "Total Reviews", value: reviews.length.toString(), icon: Star, color: "text-gold" },
+    { label: "Featured Products", value: products.filter(p => p.is_featured).length.toString(), icon: Sparkles, color: "text-green-500" },
   ];
 
   const [activeTab, setActiveTab] = useState("products");
@@ -178,9 +161,8 @@ const Admin = () => {
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-6 max-w-[1000px]">
+          <TabsList className="grid w-full grid-cols-5 max-w-[1000px]">
             <TabsTrigger value="products">Products</TabsTrigger>
-            <TabsTrigger value="orders">Orders</TabsTrigger>
             <TabsTrigger value="reviews">Reviews</TabsTrigger>
             <TabsTrigger value="blog">Journal</TabsTrigger>
             <TabsTrigger value="analytics">Analytics</TabsTrigger>
@@ -196,20 +178,6 @@ const Admin = () => {
               </CardHeader>
               <CardContent>
                 <ProductList products={products} loading={loading} onRefresh={fetchData} />
-              </CardContent>
-            </Card>
-          </TabsContent>
-          <TabsContent value="orders" className="mt-6">
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between">
-                <div>
-                  <CardTitle>Orders</CardTitle>
-                  <CardDescription>View and manage customer orders.</CardDescription>
-                </div>
-                <NewOrderForm onSuccess={fetchData} />
-              </CardHeader>
-              <CardContent>
-                <OrderList orders={orders} loading={loading} onRefresh={fetchData} />
               </CardContent>
             </Card>
           </TabsContent>

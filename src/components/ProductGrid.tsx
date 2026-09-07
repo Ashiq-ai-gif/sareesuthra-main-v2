@@ -47,7 +47,7 @@ const ProductGrid = () => {
 
   // Filter State
   const [activeCategory, setActiveCategory] = useState("All");
-  const [priceRange, setPriceRange] = useState([0, 5000]);
+  const [priceRange, setPriceRange] = useState([0, 20000]);
   const [sortBy, setSortBy] = useState("featured");
   // Sorting Options
   const sortOptions = [
@@ -146,8 +146,8 @@ const ProductGrid = () => {
                                 <span>₹{priceRange[0]} - ₹{priceRange[1]}+</span>
                             </div>
                             <Slider
-                                defaultValue={[0, 5000]}
-                                max={5000}
+                                defaultValue={[0, 20000]}
+                                max={20000}
                                 step={100}
                                 value={priceRange}
                                 onValueChange={setPriceRange}
@@ -197,7 +197,7 @@ const ProductGrid = () => {
           <div className="flex justify-between items-center text-xs text-gray-400 uppercase tracking-widest mb-4 px-2">
              <span>{filteredProducts.length} Products</span>
              {activeCategory !== "All" && (
-                <button onClick={() => { setActiveCategory("All"); setPriceRange([0, 5000]); }} className="text-puniora-orange-500 hover:underline">
+                <button onClick={() => { setActiveCategory("All"); setPriceRange([0, 20000]); }} className="text-puniora-orange-500 hover:underline">
                     Clear Filters
                 </button>
              )}

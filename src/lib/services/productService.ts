@@ -1,4 +1,4 @@
-import { supabase } from "@/lib/supabase";
+import { supabase, insforge } from "@/lib/supabase";
 import { Product } from "@/lib/products";
 
 // Table name: products
@@ -137,7 +137,7 @@ export const productService = {
     const dbProduct = mapToDb(product);
     const { data, error } = await supabase
       .from(TABLE_NAME)
-      .insert(dbProduct)
+      .insert([dbProduct])
       .select();
 
     if (error) throw error;
@@ -198,31 +198,22 @@ export const productService = {
       // Fallback to original file is automatic since fileToUpload = file initially
     }
 
-    const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
-    const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
+    // Upload to InsForge Storage (public "product-images" bucket).
+    // Requires an authenticated session (the admin signs in via password),
+    // so make sure you are logged in to the admin panel before uploading.
+    const { data, error } = await insforge.storage
+      .from("product-images")
+      .uploadAuto(fileToUpload);
 
-    if (!cloudName || !uploadPreset) {
-      throw new Error("Cloudinary is not configured. Missing VITE_CLOUDINARY_CLOUD_NAME or VITE_CLOUDINARY_UPLOAD_PRESET.");
+    if (error || !data?.url) {
+      console.error("InsForge storage upload failed:", error);
+      throw new Error(
+        error?.message ||
+          "Image upload failed. Please sign in to the admin panel again and retry."
+      );
     }
 
-    const formData = new FormData();
-    formData.append("file", fileToUpload);
-    formData.append("upload_preset", uploadPreset);
-    formData.append("folder", "saree-sutra/products");
-
-    const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
-      method: "POST",
-      body: formData,
-    });
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("Cloudinary upload failed:", errorText);
-      throw new Error("Image upload failed");
-    }
-
-    const result = await response.json();
-    return result.secure_url as string;
+    return data.url as string;
   },
 
   // Mock seed data for initial setup if table is empty

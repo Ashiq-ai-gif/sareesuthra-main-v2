@@ -15,7 +15,7 @@ const Hero = () => {
   };
 
   return (
-    <div className="relative min-h-[90vh] flex items-center bg-puniora-void overflow-hidden pt-20">
+    <div className="relative flex items-start bg-puniora-void overflow-hidden pt-28 md:pt-56 pb-16">
       {/* Decorative Background Elements */}
       <div className="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-l from-puniora-orange-50 to-transparent opacity-60 z-0"></div>
       <div className="absolute -bottom-20 -left-20 w-96 h-96 bg-gold/10 rounded-full blur-3xl z-0"></div>
@@ -70,7 +70,7 @@ const Hero = () => {
         </div>
 
         {/* Right Image/Visual */}
-        <div className="relative h-[55vh] md:h-[80vh] w-full animate-fade-in order-first md:order-none" style={{ animationDelay: '0.2s' }}>
+        <div className="relative h-[55vh] md:h-[72vh] w-full animate-fade-in order-first md:order-none" style={{ animationDelay: '0.2s' }}>
            <div className="absolute inset-0 bg-transparent z-10"></div>
            <div className="relative h-full w-full rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white">
               <img 

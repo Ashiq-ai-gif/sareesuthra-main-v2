@@ -73,7 +73,7 @@ const InvoicePage = () => {
                  <p className="font-bold text-lg mb-1">Puniora Inc.</p>
                  <p>Luxury Fragrance Hub</p>
                  <p>Kerala, India</p>
-                 <p>support@puniora.com</p>
+                 <p>contact@sareesutraofficial.com</p>
               </div>
            </div>
 
