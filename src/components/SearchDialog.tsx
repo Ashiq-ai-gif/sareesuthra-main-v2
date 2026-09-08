@@ -86,14 +86,14 @@ const SearchDialog = ({ open, onOpenChange }: SearchDialogProps) => {
   return (
     <CommandDialog open={open} onOpenChange={onOpenChange}>
       <CommandInput
-        placeholder="Search perfumes, notes, or categories..."
+        placeholder="Search sarees, fabrics, or categories..."
         value={query}
         onValueChange={setQuery}
         className="text-base h-16 md:h-14 font-medium"
       />
       <CommandList className="max-h-[60vh] md:max-h-[300px] p-2">
         <CommandEmpty className="py-10 text-muted-foreground text-sm font-medium">
-          No fragrances found.
+          No sarees found.
         </CommandEmpty>
 
         {loading ? (
@@ -106,7 +106,7 @@ const SearchDialog = ({ open, onOpenChange }: SearchDialogProps) => {
             {!query && (
               <CommandGroup heading="Suggestions" className="pt-2 pb-4">
                  <div className="grid grid-cols-2 gap-2 px-1">
-                  {["Best for Men", "Best for Women", "Unisex Collection", "Rose Scents"].map((item) => (
+                  {["Best for Men", "Best for Women", "Unisex Collection", "Silk Sarees"].map((item) => (
                     <CommandItem 
                       key={item} 
                       onSelect={() => setQuery(item.startsWith("Best for") ? item.replace("Best for ", "") : item.split(" ")[0])}

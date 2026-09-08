@@ -34,8 +34,8 @@ const BlogList = () => {
       <Header />
       <main className="flex-1 container mx-auto px-6 pt-24 md:pt-32 pb-20">
         <div className="text-center max-w-2xl mx-auto mb-10 md:mb-16 space-y-4">
-           <h1 className="text-3xl md:text-5xl font-heading animate-fade-in">The Fragrance Journal</h1>
-           <p className="text-muted-foreground text-lg animate-slide-up">Discover stories, tips, and the art behind our scents.</p>
+           <h1 className="text-3xl md:text-5xl font-heading animate-fade-in">The Saree Journal</h1>
+           <p className="text-muted-foreground text-lg animate-slide-up">Discover stories, tips, and the art behind our sarees.</p>
         </div>
 
         {loading ? (

@@ -148,11 +148,10 @@ const Contact = () => {
                                             <MapPin className="h-6 w-6 text-gold" />
                                         </div>
                                         <div>
-                                            <p className="font-bold mb-1">Address & GST</p>
+                                            <p className="font-bold mb-1">Address</p>
                                             <p className="text-muted-foreground">
-                                                213/9, Melma Nagar main road Mangadu,<br />
-                                                Chennai, Tamilnadu 600122<br />
-                                                <span className="font-bold mt-1 block text-gold/80">GST: 33AGNPI3783K2ZZ</span>
+                                                Plammoottil House, 63/667 C, Gandhi Nagar,<br />
+                                                Kaloor PO, Kochi, Ernakulam, Kerala 682017
                                             </p>
                                         </div>
                                     </div>

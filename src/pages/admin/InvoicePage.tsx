@@ -54,8 +54,8 @@ const InvoicePage = () => {
         {/* Header */}
         <header className="flex justify-between items-start border-b-2 border-black pb-8 mb-8">
           <div className="space-y-2">
-            <h1 className="text-4xl font-heading tracking-widest text-gold uppercase">Puniora</h1>
-            <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground">Luxury Fragrance Hub</p>
+            <h1 className="text-4xl font-heading tracking-widest text-gold uppercase">Saree Sutra</h1>
+            <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground">Handwoven Sarees</p>
           </div>
           <div className="text-right space-y-1">
             <h2 className="text-2xl font-bold uppercase tracking-widest text-gray-900">Invoice</h2>
@@ -70,8 +70,8 @@ const InvoicePage = () => {
            <div className="space-y-4">
               <h3 className="text-xs font-bold uppercase tracking-widest text-gray-400 border-b border-gray-100 pb-2">From</h3>
               <div className="text-sm leading-relaxed">
-                 <p className="font-bold text-lg mb-1">Puniora Inc.</p>
-                 <p>Luxury Fragrance Hub</p>
+                 <p className="font-bold text-lg mb-1">Saree Sutra</p>
+                 <p>Handwoven Sarees</p>
                  <p>Kerala, India</p>
                  <p>contact@sareesutraofficial.com</p>
               </div>

@@ -96,7 +96,7 @@ export const shiprocketService = {
   async checkServiceability(pincode: string) {
       try {
           const token = await this.login();
-          const pickupPincode = import.meta.env.VITE_SHIPROCKET_PICKUP_PINCODE || "600122";
+          const pickupPincode = import.meta.env.VITE_SHIPROCKET_PICKUP_PINCODE || "682017";
           
           const url = `${this.baseUrl}/v1/external/courier/serviceability?pickup_postcode=${pickupPincode}&delivery_postcode=${pincode}&weight=0.5&cod=1`;
           

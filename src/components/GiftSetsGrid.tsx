@@ -61,7 +61,7 @@ const GiftSetsGrid = () => {
             Gift Bundles
           </h2>
           <p className="text-muted-foreground max-w-lg mx-auto italic">
-            Perfectly paired fragrances for yourself or someone special.
+            Perfectly paired sarees for yourself or someone special.
           </p>
         </div>
 

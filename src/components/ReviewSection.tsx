@@ -168,7 +168,7 @@ const ReviewSection = ({ productId }: ReviewSectionProps) => {
               <Label htmlFor="comment">Review</Label>
               <Textarea
                 id="comment"
-                placeholder="Share your experience with this fragrance..."
+                placeholder="Share your experience with this saree..."
                 className="min-h-[100px]"
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}

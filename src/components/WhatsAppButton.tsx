@@ -8,7 +8,7 @@ const WhatsAppButton = () => {
     if (location.pathname.startsWith("/admin")) return null;
 
     const phoneNumber = "917356424034";
-    const message = encodeURIComponent("Hi, I identify this from the Puniora website and would like to know more.");
+    const message = encodeURIComponent("Hi, I identify this from the Saree Sutra website and would like to know more.");
 
     return (
         <a

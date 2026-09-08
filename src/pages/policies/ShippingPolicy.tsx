@@ -130,7 +130,7 @@ const ShippingPolicy = () => {
                         <section className="glass p-8 rounded-3xl space-y-4">
                             <h2 className="text-2xl font-heading">Packaging</h2>
                             <p className="text-muted-foreground leading-relaxed">
-                                All fragrances are carefully packaged in premium boxes with protective materials to ensure they arrive in perfect condition. Each package is sealed and tamper-proof.
+                                All sarees are carefully packaged in premium boxes with protective materials to ensure they arrive in perfect condition. Each package is sealed and tamper-proof.
                             </p>
                         </section>
 

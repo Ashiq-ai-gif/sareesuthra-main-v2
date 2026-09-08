@@ -79,9 +79,8 @@ const Footer = () => {
                   <MapPin className="h-4 w-4" />
                 </div>
                 <span className="mt-1.5 leading-relaxed">
-                  213/9, Melma Nagar main road Mangadu,<br />
-                  Chennai, Tamilnadu 600122<br />
-                  <span className="text-gold/80">GST: 33AGNPI3783K2ZZ</span>
+                  Plammoottil House, 63/667 C, Gandhi Nagar,<br />
+                  Kaloor PO, Kochi, Ernakulam, Kerala 682017
                 </span>
               </div>
             </div>

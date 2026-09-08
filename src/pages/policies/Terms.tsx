@@ -21,7 +21,7 @@ const Terms = () => {
                  <h2 className="text-2xl font-heading text-foreground">1. Agreement to Terms</h2>
               </div>
               <p>
-                These Terms and Conditions constitute a legally binding agreement made between you, whether personally or on behalf of an entity ("you") and <strong>Puniora</strong> ("we," "us," or "our"), concerning your access to and use of our website. By accessing the site, you confirm that you have read, understood, and agreed to be bound by all of these Terms and Conditions.
+                These Terms and Conditions constitute a legally binding agreement made between you, whether personally or on behalf of an entity ("you") and <strong>Saree Sutra</strong> ("we," "us," or "our"), concerning your access to and use of our website. By accessing the site, you confirm that you have read, understood, and agreed to be bound by all of these Terms and Conditions.
               </p>
             </section>
 
@@ -58,7 +58,7 @@ const Terms = () => {
             <section className="space-y-4">
               <h2 className="text-2xl font-heading text-foreground">5. Governing Law</h2>
               <p>
-                These Terms shall be governed by and defined following the laws of India. Puniora and yourself irrevocably consent that the courts of Chennai, India shall have exclusive jurisdiction to resolve any dispute which may arise in connection with these terms.
+                These Terms shall be governed by and defined following the laws of India. Saree Sutra and yourself irrevocably consent that the courts of Ernakulam, Kerala, India shall have exclusive jurisdiction to resolve any dispute which may arise in connection with these terms.
               </p>
             </section>
             

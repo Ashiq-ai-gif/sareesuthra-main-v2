@@ -27,11 +27,11 @@ const RefundPolicy = () => {
                                 We only accept returns for products that are damaged during shipping.
                             </p>
                             <p className="text-muted-foreground leading-relaxed">
-                                Due to the nature of our luxury fragrances, we cannot accept returns for:
+                                Due to the nature of our luxury sarees, we cannot accept returns for:
                             </p>
                             <ul className="space-y-2 text-muted-foreground">
                                 <li>Change of mind</li>
-                                <li>Dislike of fragrance</li>
+                                <li>Dislike of the saree</li>
                                 <li>Wrong product ordered by customer</li>
                                 <li>Opened or used products</li>
                             </ul>
@@ -68,7 +68,7 @@ const RefundPolicy = () => {
                                 <ul className="text-sm text-muted-foreground space-y-1 m-0">
                                     <li>• Seal broken or product used</li>
                                     <li>• Minor packaging dents that don't affect product</li>
-                                    <li>• Fragrance preference issues</li>
+                                    <li>• Saree preference issues</li>
                                     <li>• Buyer's remorse</li>
                                 </ul>
                             </div>

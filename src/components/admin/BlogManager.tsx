@@ -66,7 +66,7 @@ const BlogManager = () => {
         excerpt: "",
         cover_image: "",
         media_type: "image",
-        author_name: "Puniora Team"
+        author_name: "Saree Sutra Team"
     });
 
     useEffect(() => {
@@ -123,7 +123,7 @@ const BlogManager = () => {
             excerpt: "",
             cover_image: "",
             media_type: "image",
-            author_name: "Puniora Team"
+            author_name: "Saree Sutra Team"
         });
         setEditingId(null);
     };

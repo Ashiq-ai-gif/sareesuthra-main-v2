@@ -24,7 +24,7 @@ const PrivacyPolicy = () => {
                                 <h2 className="text-2xl font-heading m-0">Information We Collect</h2>
                             </div>
                             <p className="text-muted-foreground leading-relaxed">
-                                At Puniora, we collect information that you provide directly to us when you create an account, place an order, or contact us. This includes:
+                                At Saree Sutra, we collect information that you provide directly to us when you create an account, place an order, or contact us. This includes:
                             </p>
                             <ul className="space-y-2 text-muted-foreground">
                                 <li><strong>Personal Information:</strong> Name, email address, phone number, and shipping address</li>

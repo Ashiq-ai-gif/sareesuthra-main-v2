@@ -9,7 +9,7 @@ const PaymentGateway = () => {
   const navigate = useNavigate();
   const [status, setStatus] = useState<"scanning" | "processing" | "success">("scanning");
   const upiId = import.meta.env.VITE_UPI_ID || "puniora@upi"; // Fallback placeholder
-  const merchantName = "Puniora Luxury Perfumes";
+  const merchantName = "Saree Sutra";
 
   const handleManualConfirmation = () => {
     setStatus("processing");
@@ -48,7 +48,7 @@ const PaymentGateway = () => {
 
         {/* Amount */}
         <div className="mb-8 text-center">
-            <p className="text-sm text-white/60 uppercase tracking-widest mb-1">Paying Puniora</p>
+            <p className="text-sm text-white/60 uppercase tracking-widest mb-1">Paying Saree Sutra</p>
             <h1 className="text-4xl font-bold">₹{amount}</h1>
         </div>
 

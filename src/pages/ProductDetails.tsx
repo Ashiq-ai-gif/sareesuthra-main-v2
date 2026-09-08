@@ -136,7 +136,7 @@ const ProductDetails = () => {
     if (!product) return;
     const shareData = {
       title: product.name,
-      text: `Check out ${product.name}: ${product.description ? product.description.substring(0, 100) + '...' : ''} at Puniora!`,
+      text: `Check out ${product.name}: ${product.description ? product.description.substring(0, 100) + '...' : ''} at Saree Sutra!`,
       url: window.location.href,
     };
 
@@ -164,7 +164,7 @@ const ProductDetails = () => {
     return (
       <div className="min-h-screen flex flex-col pt-24 items-center justify-center text-center px-4">
         <h1 className="text-3xl font-heading mb-4">Product Not Found</h1>
-        <p className="text-muted-foreground mb-8 text-lg">The fragrance you're looking for doesn't exist or has been removed.</p>
+        <p className="text-muted-foreground mb-8 text-lg">The saree you're looking for doesn't exist or has been removed.</p>
         <Link to="/">
           <Button variant="gold" size="lg">Return to Collection</Button>
         </Link>
@@ -260,7 +260,7 @@ const ProductDetails = () => {
                       size="icon"
                       onClick={handleShare}
                       className="rounded-full w-12 h-12 bg-gold text-white shadow-xl hover:bg-gold/90 transition-all duration-300 group/share z-30"
-                      title="Share this fragrance"
+                      title="Share this saree"
                     >
                       <Share2 className="h-5 w-5 group-hover/share:scale-110 transition-transform" />
                     </Button>

@@ -295,8 +295,8 @@ const Checkout = () => {
               key: import.meta.env.VITE_RAZORPAY_KEY_ID,
               amount: Math.round(finalTotal * 100), // in paise using detailed final total
               currency: "INR",
-              name: "Puniora",
-              description: "Purchase from Puniora",
+              name: "Saree Sutra",
+              description: "Purchase from Saree Sutra",
               image: `${window.location.origin}/favicon.png`,
               handler: async function (response: any) {
                 // Payment Success
