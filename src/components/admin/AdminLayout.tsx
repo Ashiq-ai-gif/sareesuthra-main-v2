@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Package, ShoppingCart, LogOut, Home, Menu, Settings, BarChart3, BookOpen } from "lucide-react";
+import { Package, ShoppingCart, LogOut, Home, Menu, Settings, BarChart3, BookOpen, Mail } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -17,6 +17,7 @@ const AdminLayout = ({ children, activeTab, onTabChange }: AdminLayoutProps) => 
 
   const navItems = [
     { icon: Package, label: "Products", href: "/admin", id: "products" },
+    { icon: Mail, label: "Messages", href: "/admin", id: "messages" },
     { icon: Menu, label: "Reviews", href: "/admin", id: "reviews" },
     { icon: BookOpen, label: "Journal", href: "/admin", id: "blog" },
     { icon: BarChart3, label: "Analytics", href: "/admin", id: "analytics" },

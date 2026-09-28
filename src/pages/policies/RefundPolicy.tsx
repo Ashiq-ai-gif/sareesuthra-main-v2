@@ -100,7 +100,7 @@ const RefundPolicy = () => {
                                     <div>
                                         <h3 className="font-bold mb-1">Contact Us Within 24 Hours</h3>
                                         <p className="text-sm text-muted-foreground m-0">
-                                            Email us at <a href="mailto:contact@sareesutraofficial.com" className="text-gold hover:underline">contact@sareesutraofficial.com</a> or call <strong>+91 7356424034</strong>
+                                            Email us at <a href="mailto:contact.sareesutra@gmail.com" className="text-gold hover:underline">contact.sareesutra@gmail.com</a> or call <strong>+91 7356424034</strong>
                                         </p>
                                         <p className="text-sm text-muted-foreground mt-2 m-0">
                                             Include: Order ID, photos/videos, and description of damage
@@ -190,7 +190,7 @@ const RefundPolicy = () => {
                             <div className="space-y-3">
                                 <div className="flex items-center gap-3">
                                     <Mail className="h-5 w-5 text-gold" />
-                                    <a href="mailto:contact@sareesutraofficial.com" className="text-gold hover:underline">contact@sareesutraofficial.com</a>
+                                    <a href="mailto:contact.sareesutra@gmail.com" className="text-gold hover:underline">contact.sareesutra@gmail.com</a>
                                 </div>
                                 <div className="flex items-center gap-3">
                                     <Phone className="h-5 w-5 text-gold" />

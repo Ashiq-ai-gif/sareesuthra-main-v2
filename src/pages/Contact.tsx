@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
 import { SEO } from "@/components/SEO";
+import { supabase } from "@/lib/supabase";
 
 const Contact = () => {
     const [loading, setLoading] = useState(false);
@@ -23,12 +24,24 @@ const Contact = () => {
         e.preventDefault();
         setLoading(true);
 
-        // Simulate form submission
-        setTimeout(() => {
+        try {
+            const { error } = await supabase.from("contact_messages").insert([{
+                name: formData.name,
+                email: formData.email,
+                phone: formData.phone || null,
+                message: formData.message,
+            }]);
+
+            if (error) throw error;
+
             toast.success("Message sent! We'll get back to you soon.");
             setFormData({ name: "", email: "", phone: "", message: "" });
+        } catch (err: any) {
+            console.error("Contact form submission failed:", err);
+            toast.error("Could not send your message. Please try again or email us directly.");
+        } finally {
             setLoading(false);
-        }, 1500);
+        }
     };
 
     return (
@@ -125,8 +138,8 @@ const Contact = () => {
                                         </div>
                                         <div>
                                             <p className="font-bold mb-1">Email</p>
-                                            <a href="mailto:contact@sareesutraofficial.com" className="text-muted-foreground hover:text-gold transition-colors">
-                                                contact@sareesutraofficial.com
+                                            <a href="mailto:contact.sareesutra@gmail.com" className="text-muted-foreground hover:text-gold transition-colors">
+                                                contact.sareesutra@gmail.com
                                             </a>
                                         </div>
                                     </div>

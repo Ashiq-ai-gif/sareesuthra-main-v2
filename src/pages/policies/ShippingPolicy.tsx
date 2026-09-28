@@ -155,7 +155,7 @@ const ShippingPolicy = () => {
                                 For shipping-related queries, contact us:
                             </p>
                             <div className="space-y-2 text-muted-foreground">
-                                <p><strong>Email:</strong> <a href="mailto:contact@sareesutraofficial.com" className="text-gold hover:underline">contact@sareesutraofficial.com</a></p>
+                                <p><strong>Email:</strong> <a href="mailto:contact.sareesutra@gmail.com" className="text-gold hover:underline">contact.sareesutra@gmail.com</a></p>
                                 <p><strong>Phone:</strong> +91 7356424034</p>
                             </div>
                         </section>

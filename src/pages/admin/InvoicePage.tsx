@@ -73,7 +73,7 @@ const InvoicePage = () => {
                  <p className="font-bold text-lg mb-1">Saree Sutra</p>
                  <p>Handwoven Sarees</p>
                  <p>Kerala, India</p>
-                 <p>contact@sareesutraofficial.com</p>
+                 <p>contact.sareesutra@gmail.com</p>
               </div>
            </div>
 

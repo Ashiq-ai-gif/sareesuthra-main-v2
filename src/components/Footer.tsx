@@ -66,13 +66,13 @@ const Footer = () => {
                 <span className="mt-1.5">7356424034</span>
               </a>
               <a
-                href="mailto:contact@sareesutraofficial.com"
+                href="mailto:contact.sareesutra@gmail.com"
                 className="flex items-start gap-4 text-sm text-white/60 hover:text-gold transition-colors group"
               >
                 <div className="p-2 border border-white/10 rounded-full group-hover:border-gold/50 transition-colors">
                   <Mail className="h-4 w-4" />
                 </div>
-                <span className="mt-1.5">contact@sareesutraofficial.com</span>
+                <span className="mt-1.5">contact.sareesutra@gmail.com</span>
               </a>
               <div className="flex items-start gap-4 text-sm text-white/60 group">
                 <div className="p-2 border border-white/10 rounded-full group-hover:border-gold/50 transition-colors">

@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import SettingsTab from "@/components/admin/SettingsTab";
 import BlogManager from "@/components/admin/BlogManager";
 import AnalyticsTab from "@/components/admin/AnalyticsTab";
+import ContactMessages from "@/components/admin/ContactMessages";
 
 const Admin = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -161,8 +162,9 @@ const Admin = () => {
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-5 max-w-[1000px]">
+          <TabsList className="grid w-full grid-cols-6 max-w-[1000px]">
             <TabsTrigger value="products">Products</TabsTrigger>
+            <TabsTrigger value="messages">Messages</TabsTrigger>
             <TabsTrigger value="reviews">Reviews</TabsTrigger>
             <TabsTrigger value="blog">Journal</TabsTrigger>
             <TabsTrigger value="analytics">Analytics</TabsTrigger>
@@ -178,6 +180,17 @@ const Admin = () => {
               </CardHeader>
               <CardContent>
                 <ProductList products={products} loading={loading} onRefresh={fetchData} />
+              </CardContent>
+            </Card>
+          </TabsContent>
+          <TabsContent value="messages" className="mt-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Messages</CardTitle>
+                <CardDescription>Enquiries sent through the website "Send Us a Message" form.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ContactMessages />
               </CardContent>
             </Card>
           </TabsContent>
